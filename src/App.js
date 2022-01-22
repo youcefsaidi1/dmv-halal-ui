@@ -40,7 +40,7 @@ async componentDidMount(){
 filterName = (query)=>{
   let filteredRestaurants = this.state.list;
   filteredRestaurants = filteredRestaurants.filter(restaurant =>{
-    return restaurant.name.toLowerCase().includes(query.toLowerCase())
+    return restaurant.restaurant.toLowerCase().includes(query.toLowerCase())
   })
   this.setState({filteredRestaurants: filteredRestaurants})
 }
