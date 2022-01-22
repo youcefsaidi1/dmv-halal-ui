@@ -1,0 +1,53 @@
+
+.header {
+   color: rgb(109, 0, 0);
+   text-align: center;
+
+   background-size: cover;
+   font-family: 'Permanent Marker', cursive;
+}
+.header:hover {
+    color: rgb(77, 0, 0);
+}
+
+.card{
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2)!important;
+    transition: 0.3s;
+}
+.card:hover{
+    color:rgb(95, 0, 0);
+    background-color: rgb(216, 216, 216)!important;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)!important;
+    
+}
+#details_page_review_section{
+    box-shadow: 16px 8px 16px 0px rgba(0,0,0,0.2)!important;
+    min-height:100vh;
+    height: 100%;
+    border: solid rgb(216, 216, 216);
+    border-radius: 25px;
+}
+
+.RestaurantRating{
+    font-size: 1.5rem;
+}
+
+body{
+    background-image: linear-gradient(to bottom, rgb(235, 235, 235) , rgb(255, 255, 255));
+    background-repeat: no-repeat;
+}
+
+#navbar{
+    color: rgb(109, 0, 0);
+}
+
+.Locations, .addRestaurant{
+    margin-top: 10px;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+
+  }
