@@ -15,7 +15,7 @@ class Location extends React.Component {
         let address = `${state.data.address} ${state.data.city} ${state.data.state} ${state.data.zip}`;
         return(
             <Card className="shadow-lg p-3 mb-5 bg-white rounded my-2" id={state.data.restaurantid} onClick={this.handleClick}>
-            <CardImg top width="100%" src="https://www.stou.ac.th/schools/sla/modules/module12/images/restaurant.png" alt="Card image cap" />
+            {/* <CardImg top width="100%" src="https://www.stou.ac.th/schools/sla/modules/module12/images/restaurant.png" alt="Card image cap" /> */}
             <h5 className="card-title text-center">{state.data.restaurant}</h5>
             <CardSubtitle>
                 {state.data.rating>0?<StarRatingComponent emptyStarColor="gray" name="ResaurantRatingCard" value={state.data.rating} editable={false} />:null}
