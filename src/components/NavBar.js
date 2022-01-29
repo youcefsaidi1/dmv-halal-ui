@@ -25,9 +25,9 @@ const NavBar = (props) => {
             <NavItem>
               <NavLink href="/">All Restaurants</NavLink>
             </NavItem>
-            <NavItem>
+            {/* <NavItem>
               <NavLink href="/addRestaurant">Add New</NavLink>
-            </NavItem>
+            </NavItem> */}
 
           </Nav>
          

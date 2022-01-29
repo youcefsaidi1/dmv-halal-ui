@@ -44,7 +44,7 @@ export default class AddRestaurant extends React.Component{
             <Container className="addRestaurant">
                     <Row > 
                             {this.state.showErrorMessage?<Col><h4 className="d-flex justify-content-center">Sorry, we couldn't process your request :(</h4></Col>:<div></div>}   
-                            {this.state.showMessage?<Col><h4 className="d-flex justify-content-center">Thank you, we'll add you submission shortly!</h4></Col>:<div></div>}   
+                            {this.state.showMessage?<Col><h4 className="d-flex justify-content-center">Thank you, we'll add your submission upon review!</h4></Col>:<div></div>}   
                     </Row>
                     <Form onSubmit={this.handleformSubmit.bind(this)}>
                         <FormGroup>
