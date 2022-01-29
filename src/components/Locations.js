@@ -34,7 +34,7 @@ import {Container, Row, Col} from 'reactstrap'
                         </div> 
                     </Col>
                 </Row>
-                <Row>
+                <Row className="mt-2 mb-5">
                     {restaurants}
                 </Row>                
             </Container>

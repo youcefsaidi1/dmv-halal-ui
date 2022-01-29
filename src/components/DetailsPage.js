@@ -10,7 +10,7 @@ var BASEURL = "13v4yjfvyi.execute-api.us-east-1.amazonaws.com";
 class DetailsPage extends React.Component{
     constructor(props){
         super(props)
-        this.state = {successMessage: false, detailsLoaded: false, displayRatingMessage: false, displayCommentMessage: false  ,reviewRating: 0, comment: "", details: {name: "", Reviews: [{comment: "No Reviews"}]}}
+        this.state = {showButton: true, successMessage: false, detailsLoaded: false, displayRatingMessage: false, displayCommentMessage: false  ,reviewRating: 0, comment: "", details: {name: "", Reviews: [{comment: "No Reviews"}]}}
     }
     componentDidMount(){
         axios.get(`https://${BASEURL}/restaurant/${this.props.match.params.id}`).then(data=>{
@@ -44,6 +44,7 @@ class DetailsPage extends React.Component{
                 this.setState({displayCommentMessage: false, displayRatingMessage: true})
             }else{
                 e.preventDefault()
+                this.setState({showButton: false})
                 axios.post(`https://${BASEURL}/addCommentToRestaurant`,{data: this.state.details, comment: this.state.comment, rating: this.state.reviewRating}).then(data=>{ 
                         this.setState({successMessage: true, displayCommentMessage: false, displayRatingMessage: false})  
                 }).catch(err=>{
@@ -146,7 +147,8 @@ class DetailsPage extends React.Component{
                                             </Input>
                                             {this.state.displayCommentMessage?<h6>Comment must be at least 4 characters!</h6>:null}
                                             {this.state.displayRatingMessage?<h6>Rating must have at least 1 star!</h6>:null}
-                                            {this.state.successMessage?<h6>Thank you for your feedback! Pending approval...</h6>:<Button className="my-2">Submit</Button>}
+                                            {this.state.successMessage?<h6>Thank you for your feedback! Pending approval...</h6>:null}
+                                            {this.state.showButton?<Button className="my-2" name="reviewButton">Submit</Button>:null}
 
                                         </FormGroup>
                                     </Form>                                        
