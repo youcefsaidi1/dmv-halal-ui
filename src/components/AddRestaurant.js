@@ -5,10 +5,10 @@ var BASEURL='192.168.1.162'
 export default class AddRestaurant extends React.Component{
     constructor(props){
         super(props)
-        this.state = {showMessage:false, showErrorMessage: false}
+        this.state = {showMessage:false, showErrorMessage: false, showButton: true}
     }
     handleformSubmit = (e)=>{
-        this.setState({showMessage: true})
+        this.setState({showMessage: true, showButton: false})
         e.preventDefault()
         var payload ={
             name: e.target.Name.value,

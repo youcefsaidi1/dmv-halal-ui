@@ -18,6 +18,7 @@ class DetailsPage extends React.Component{
                 this.props.history.push('/restaurants')
                 return data.data.Item[0]
             }else{
+
                 this.setState({details: data.data.Item, detailsLoaded: true})  
             }
             return data.data.Item
@@ -90,6 +91,7 @@ class DetailsPage extends React.Component{
             })
         }
 
+        if(this.state.detailsLoaded){
         return(
             <Container>
                 <Row>
@@ -161,6 +163,13 @@ class DetailsPage extends React.Component{
                 </div>
             </Container>
         )
+        }
+        else{
+            return(
+                <p>Loading...</p>
+            )
+            
+        }
     }
 }
 
