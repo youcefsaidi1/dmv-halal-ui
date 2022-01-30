@@ -19,9 +19,7 @@ export default class AddRestaurant extends React.Component{
             state: e.target.State.value,
             zip: e.target.Zip.value,
             phone: e.target.Phone.value,
-            url: e.target.url.value,
-            type: e.target.Type.value,
-            rating: 0
+            type: e.target.Type.value
         }
 
         var authOptions = {

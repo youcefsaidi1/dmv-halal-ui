@@ -13,6 +13,10 @@ class DetailsPage extends React.Component{
         this.state = {showButton: true, successMessage: false, detailsLoaded: false, displayRatingMessage: false, displayCommentMessage: false  ,reviewRating: 0, comment: "", details: {name: "", Reviews: [{comment: "No Reviews"}]}}
     }
     componentDidMount(){
+        if (this.props.details.restaurant !== undefined){
+            this.setState({details: this.props.details, detailsLoaded: true})
+        }
+        else{  
         axios.get(`https://${BASEURL}/restaurant/${this.props.match.params.id}`).then(data=>{
             if(data.data.Item === undefined || data.data.name === "SequelizeError"){
                 this.props.history.push('/restaurants')
@@ -25,6 +29,7 @@ class DetailsPage extends React.Component{
         }).catch(err=>{
             this.props.history.push('/restaurants')
         })
+    }
     }
 
     handleChange = (e) =>{
