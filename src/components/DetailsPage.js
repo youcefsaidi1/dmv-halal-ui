@@ -65,7 +65,6 @@ class DetailsPage extends React.Component{
         const reviewRating  = this.state.reviewRating;
         var review = (<div></div>);
         if(this.state.detailsLoaded){
-            console.log(this.state)
             review = this.state.details.reviews.map((review, idx) =>{
              let dateCreated = review.createdAt;
              if(review.approved){
@@ -109,21 +108,21 @@ class DetailsPage extends React.Component{
                         <StarRatingComponent className="RestaurantRating" name="ResaurantRating" emptyStarColor="gray" value={this.state.details.rating} editable={false} />
                     </Col>
                     <Col lg={{size: 8}}>
-                       {this.state.details.url === undefined?null:<Button target="_blank" href={this.state.details.url}>Visit Website</Button>}
+                       {this.state.details.url?<Button target="_blank" href={this.state.details.url}>Visit Website</Button>:null}
                     </Col>
                 </Row>
                 <Row>
                     <Col lg={{size: 12}}>
-                    <h3>Cuisine: {this.state.details.cuisine}</h3>
+                    {this.state.details.cuisine?<h3>Cuisine: {this.state.details.cuisine}</h3>:null}
                     </Col>
                     <Col lg={{size: 12}}>
                     <h3>Address: <a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a></h3>
                     </Col>
                     <Col lg={{size: 12}}>
-                    <h3>Phone: {this.state.details.phone}</h3>
+                    {this.state.details.phone?<h3>Phone: {this.state.details.phone}</h3>: null}
                     </Col>
                     <Col lg={{size: 12}}>
-                    <h3>Category: {this.state.details.type}</h3>
+                    {this.state.details.type?<h3>Category: {this.state.details.type}</h3>:null}
                     </Col>
                 </Row>
 

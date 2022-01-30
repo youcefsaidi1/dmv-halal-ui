@@ -22,9 +22,9 @@ class Location extends React.Component {
             <CardSubtitle>
                 {state.data.rating>0?<StarRatingComponent emptyStarColor="gray" name="ResaurantRatingCard" value={state.data.rating} editable={false} />:null}
             </CardSubtitle>
-            <CardSubtitle>Cuisine: {state.data.cuisine}</CardSubtitle>
-            <CardSubtitle>Phone: {state.data.phone}</CardSubtitle>
-            <CardSubtitle>Address: {address}</CardSubtitle>
+            {state.data.cuisine?<CardSubtitle>Cuisine: {state.data.cuisine}</CardSubtitle>:<CardSubtitle>Cuisine: Not Available</CardSubtitle>}
+            {(state.data.phone)?<CardSubtitle>Phone: {state.data.phone}</CardSubtitle>:<CardSubtitle>Phone: Not Available</CardSubtitle>}
+            {state.data.address?<CardSubtitle>Address: {address}</CardSubtitle>:<CardSubtitle>Address: Not Available</CardSubtitle>}
          </Card>
             </Container>
 
@@ -32,21 +32,4 @@ class Location extends React.Component {
     }
 }
 
-
-//  var Location = (state)=> {
-//      let address = state.data.address + state.data.city + state.data.state + state.data.zip;
-//      let handleClick = ()=>{
-//          state.handleClick(4)
-//      }
-//  return (
-//  <Card className="shadow-lg p-3 mb-5 bg-white rounded my-2" id={state.data.id} onClick={state.handleClick}>
-//     <CardImg top width="100%" src="http://clipart-library.com/img/1510223.png" alt="Card image cap" />
-//     <h5 className="card-title text-center">{state.data.name}</h5>
-//     <CardSubtitle>Cuisine: {state.data.cuisine}</CardSubtitle>
-//     <CardSubtitle>Phone: {state.data.phone}</CardSubtitle>
-//     <CardSubtitle>Address: {address}</CardSubtitle>
-
-//  </Card>
-//  )
-//  }
 export default withRouter(Location)
