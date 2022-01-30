@@ -61,9 +61,11 @@ class DetailsPage extends React.Component{
         }
     }
     render(){
+        
         const reviewRating  = this.state.reviewRating;
         var review = (<div></div>);
         if(this.state.detailsLoaded){
+            console.log(this.state)
             review = this.state.details.reviews.map((review, idx) =>{
              let dateCreated = review.createdAt;
              if(review.approved){
@@ -103,8 +105,11 @@ class DetailsPage extends React.Component{
                     <Col lg={{size: 12}}>
                     <h1>{this.state.details.restaurant}</h1>
                     </Col>
-                    <Col lg={{size: 12}}>
+                    <Col lg={{size: 4}}>
                         <StarRatingComponent className="RestaurantRating" name="ResaurantRating" emptyStarColor="gray" value={this.state.details.rating} editable={false} />
+                    </Col>
+                    <Col lg={{size: 8}}>
+                       {this.state.details.url === undefined?null:<Button target="_blank" href={this.state.details.url}>Visit Website</Button>}
                     </Col>
                 </Row>
                 <Row>

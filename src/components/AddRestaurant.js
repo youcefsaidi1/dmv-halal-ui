@@ -11,7 +11,7 @@ export default class AddRestaurant extends React.Component{
         this.setState({showMessage: true, showButton: false})
         e.preventDefault()
         var payload ={
-            name: e.target.Name.value,
+            restaurant: e.target.Name.value,
             cuisine: e.target.Cuisine.value,
             region: e.target.State.value,
             address: e.target.Address.value,
@@ -41,9 +41,9 @@ export default class AddRestaurant extends React.Component{
         return(
             <Container className="addRestaurant">
                     <Row > 
-                    {this.state.showErrorMessage?<Alert>Sorry, we couldn't process your request </Alert>:<div></div>}   
+                    {this.state.showErrorMessage?<Alert color="danger">Sorry, we couldn't process your request </Alert>:<div></div>}   
                             {/* {this.state.showErrorMessage?<Col><h4 className="d-flex justify-content-center">Sorry, we couldn't process your request :(</h4></Col>:<div></div>}    */}
-                            {this.state.showMessage?<Col><h4 className="d-flex justify-content-center">Thank you, we'll add your submission upon review!</h4></Col>:<div></div>}   
+                            {this.state.showMessage?<Col><Alert color="success">Thank you, we'll add your submission upon review!</Alert></Col>:<div></div>}   
                     </Row>
                     <Form onSubmit={this.handleformSubmit.bind(this)}>
                         <FormGroup>
