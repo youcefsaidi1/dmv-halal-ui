@@ -171,7 +171,7 @@ export default class AddRestaurant extends React.Component{
                             </Row>
                         </FormGroup>   
                         <Col className='d-flex justify-content-center'> 
-                            <Button className="btn">submit</Button>
+                        {this.state.showButton? <Button className="btn">submit</Button>:null}
                         </Col>                       
                     </Form>
             </Container>
