@@ -1,7 +1,7 @@
 import React from 'react'
-import {Container, Row, Col, Form, FormGroup,  Label, Input,  Button} from 'reactstrap'
+import {Container, Row, Col, Form, FormGroup,  Label, Input,  Button, Alert} from 'reactstrap'
 import Axios from 'axios'
-var BASEURL='192.168.1.162'
+var BASEURL = "13v4yjfvyi.execute-api.us-east-1.amazonaws.com";
 export default class AddRestaurant extends React.Component{
     constructor(props){
         super(props)
@@ -23,7 +23,7 @@ export default class AddRestaurant extends React.Component{
         }
 
         var authOptions = {
-            url: `http://${BASEURL}:8080/restaurants/new`,
+            url: `https://${BASEURL}/addRestaurant`,
             method: 'post',
             data: payload
         }
@@ -41,7 +41,8 @@ export default class AddRestaurant extends React.Component{
         return(
             <Container className="addRestaurant">
                     <Row > 
-                            {this.state.showErrorMessage?<Col><h4 className="d-flex justify-content-center">Sorry, we couldn't process your request :(</h4></Col>:<div></div>}   
+                    {this.state.showErrorMessage?<Alert>Sorry, we couldn't process your request </Alert>:<div></div>}   
+                            {/* {this.state.showErrorMessage?<Col><h4 className="d-flex justify-content-center">Sorry, we couldn't process your request :(</h4></Col>:<div></div>}    */}
                             {this.state.showMessage?<Col><h4 className="d-flex justify-content-center">Thank you, we'll add your submission upon review!</h4></Col>:<div></div>}   
                     </Row>
                     <Form onSubmit={this.handleformSubmit.bind(this)}>

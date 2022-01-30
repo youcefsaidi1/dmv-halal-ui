@@ -1,6 +1,7 @@
 import React from 'react'
 import Location from './Location'
-import {Container, Row, Col} from 'reactstrap'
+import {Container, Row, Col, Image} from 'reactstrap'
+
  export default class Locations extends React.Component {
      constructor(props){
          super(props)
@@ -12,7 +13,8 @@ import {Container, Row, Col} from 'reactstrap'
      }
 
     render(){
-        var restaurants = [];     
+        var restaurants = []; 
+
         if(this.props.state.filteredRestaurants === undefined){
             restaurants = this.props.state.list.map((rest, idx) => {
             return (<Col lg={{size:4}} key={idx}><Location key={idx} data={rest} handleClick={this.props.handleClick} /></Col>)
@@ -34,8 +36,12 @@ import {Container, Row, Col} from 'reactstrap'
                         </div> 
                     </Col>
                 </Row>
-                <Row className="mt-2 mb-5">
-                    {restaurants}
+                <Row className="mt-2 mb-5 d-flex justify-content-center">
+                    {this.props.state.homePageLoaded?restaurants:
+                           
+                                <img src={require("../loading.gif")}></img>
+                           
+                    }
                 </Row>                
             </Container>
         )

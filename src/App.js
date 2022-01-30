@@ -17,12 +17,13 @@ var BASEURL = '13v4yjfvyi.execute-api.us-east-1.amazonaws.com';
 class App extends React.Component {
   constructor(props){
     super(props)
-    this.state = {list: [], details: {}}
+    this.state = {list: [], details: {}, homePageLoaded: false, error: false}
     this.renderDetails = this.renderDetails.bind(this);
   }
 async componentDidMount(){
   axios.get(`https://${BASEURL}/restaurant`).then(data=>{
     let approvedRestaurants = data.data.filter(restaurant=>{
+      this.setState({homePageLoaded: true})
       return restaurant
       // if (restaurant.approved === true){
       //   return restaurant
@@ -32,7 +33,9 @@ async componentDidMount(){
     })
 
     this.setState({list: approvedRestaurants})
-  }).catch(err=>{
+  }
+  ).catch(err=>{
+    this.setState({homePageLoaded: true, error: true})
     console.log(err)
   })
 }
@@ -68,7 +71,7 @@ renderAddRestaurant = ()=>{
   return <AddRestaurant/>
 }
   render() 
-    {     
+    {    
       return(
        <div className="App">
          <Router > 
