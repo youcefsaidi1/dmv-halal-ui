@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, CardImg, CardSubtitle} from 'reactstrap'
+import {Card, CardSubtitle} from 'reactstrap'
 import { withRouter } from "react-router-dom";
 import StarRatingComponent from 'react-star-rating-component';
 import Container from 'reactstrap/lib/Container';
@@ -20,7 +20,7 @@ class Location extends React.Component {
             {/* <CardImg top width="100%" src="https://www.stou.ac.th/schools/sla/modules/module12/images/restaurant.png" alt="Card image cap" /> */}
             <h5 className="card-title text-center">{state.data.restaurant}</h5>
             <CardSubtitle>
-                {state.data.rating>0?<StarRatingComponent emptyStarColor="gray" name="ResaurantRatingCard" value={state.data.rating} editable={false} />:null}
+                {state.data.rating>0?<StarRatingComponent emptyStarColor="gray" name="ResaurantRatingCard" value={parseFloat(state.data.rating)} editable={false} />:null}
             </CardSubtitle>
             {state.data.cuisine?<CardSubtitle>Cuisine: {state.data.cuisine}</CardSubtitle>:<CardSubtitle>Cuisine: Not Available</CardSubtitle>}
             {(state.data.phone)?<CardSubtitle>Phone: {state.data.phone}</CardSubtitle>:<CardSubtitle>Phone: Not Available</CardSubtitle>}

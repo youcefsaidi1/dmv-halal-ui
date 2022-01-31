@@ -25,11 +25,6 @@ async componentDidMount(){
     let approvedRestaurants = data.data.filter(restaurant=>{
       this.setState({homePageLoaded: true})
       return restaurant
-      // if (restaurant.approved === true){
-      //   return restaurant
-      // }else{
-      //   return null
-      // }
     })
 
     this.setState({list: approvedRestaurants})

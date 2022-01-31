@@ -1,6 +1,6 @@
 import React from 'react'
 import Location from './Location'
-import {Container, Row, Col, Image} from 'reactstrap'
+import {Container, Row, Col} from 'reactstrap'
 
  export default class Locations extends React.Component {
      constructor(props){
@@ -17,12 +17,20 @@ import {Container, Row, Col, Image} from 'reactstrap'
 
         if(this.props.state.filteredRestaurants === undefined){
             restaurants = this.props.state.list.map((rest, idx) => {
-            return (<Col lg={{size:4}} key={idx}><Location key={idx} data={rest} handleClick={this.props.handleClick} /></Col>)
+            return (<Col lg={{size:4}} key={idx}>
+                        <Location key={idx} data={rest} handleClick={this.props.handleClick} />
+                    </Col>
+                    )
         })
         }
         else{
             restaurants = this.props.state.filteredRestaurants.map((rest, idx) => {
-            return (<Col lg={{size:4}} key={idx}><Location key={idx} data={rest} handleClick={this.props.handleClick} /></Col>)})
+            return (<Col lg={{size:4}} key={idx}>
+                    <Location key={idx} data={rest} handleClick={this.props.handleClick} />
+                    </Col>
+                    )
+                }
+            )
         }
         return(
             <Container className="Locations">
@@ -37,10 +45,9 @@ import {Container, Row, Col, Image} from 'reactstrap'
                     </Col>
                 </Row>
                 <Row className="mt-2 mb-5 d-flex justify-content-center">
-                    {this.props.state.homePageLoaded?restaurants:
-                           
-                                <img src={require("../loading.gif")}></img>
-                           
+                    {this.props.state.homePageLoaded?
+                        restaurants:   
+                        <img src={require("../loading.gif")} alt="loading gif"></img>      
                     }
                 </Row>                
             </Container>
