@@ -41,7 +41,7 @@ class DetailsPage extends React.Component{
       }
 
     handleSubmit = (e)=>{
-        if(this.state.comment.length<4){
+        if( this.state.comment.length > 500){
             e.preventDefault();
             this.setState({displayCommentMessage: true, displayRatingMessage: false})
         }else{
@@ -51,7 +51,7 @@ class DetailsPage extends React.Component{
             }else{
                 e.preventDefault()
                 this.setState({showButton: false})
-                axios.post(`https://${BASEURL}/addCommentToRestaurant`,{data: this.state.details, comment: this.state.comment, rating: this.state.reviewRating}).then(data=>{ 
+                axios.post(`https://${BASEURL}/addCommentToRestaurant`,{data: this.state.details, comment: this.state.comment, rating: this.state.reviewRating, createdAt: new Date().toLocaleString()}).then(data=>{ 
                         this.setState({successMessage: true, displayCommentMessage: false, displayRatingMessage: false})  
                 }).catch(err=>{
                 this.props.history.push('/restaurants')
@@ -82,9 +82,12 @@ class DetailsPage extends React.Component{
                                             Rating: <StarRatingComponent emptyStarColor="gray" value={review.rating} editable={false} name={`reviewRating${idx}`}/>
                                         </Row>        
                                     </CardSubtitle>
+                                    {review.comment?
                                     <CardFooter>
                                         <h5>{review.comment}</h5>
-                                    </CardFooter>                                    
+                                    </CardFooter>
+                                    : 
+                                    null}                                  
                                         <p>{dateCreated}</p> 
                                 </Container>
                             </Card>
@@ -156,9 +159,10 @@ class DetailsPage extends React.Component{
                                         <FormGroup>
                                             <Input type="textarea" placeholder={`How was your experience at ${this.state.details.restaurant}`}>
                                             </Input>
-                                            {this.state.displayCommentMessage?<h6>Comment must be at least 4 characters!</h6>:null}
+                                            {this.state.displayCommentMessage?<h6>Comment must be less than 500 characters!</h6>:null}
                                             {this.state.displayRatingMessage?<h6>Rating must have at least 1 star!</h6>:null}
-                                            {this.state.successMessage?<h6>Thank you for your feedback! Pending approval...</h6>:null}
+                                            {this.state.successMessage?<h6>Thank you for your feedback!</h6>:null}
+                                            {(!this.state.successMessage &&  !this.state.showButton)?<h6>Submitting...</h6>:null}
                                             {this.state.showButton?<Button className="my-2" name="reviewButton">Submit</Button>:null}
 
                                         </FormGroup>
