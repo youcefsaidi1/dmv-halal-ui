@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
-import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, CardSubtitle} from 'reactstrap';
+import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 
 
@@ -109,17 +109,43 @@ class DetailsPage extends React.Component{
             return(
                 <Container>
                     <Row>
-                        <Col lg={{size: 12}}>
-                        <h1>{this.state.details.restaurant}</h1>
+                        <Col lg={{size: 6}}>
+                            <Row className="d-flex justify-content-center">
+                                <h1>{this.state.details.restaurant}</h1>
+                            </Row>
+                            <Row className="d-flex justify-content-center">
+                                <Col sm={{size: 6}} className="d-flex justify-content-center">
+                                <StarRatingComponent className="RestaurantRating" size={70} name="ResaurantRating" emptyStarColor="gray" value={parseFloat(this.state.details.rating)} editable={false} />
+                                </Col>
+                               <Col sm={{size: 6}} className="d-flex justify-content-center">
+                               {this.state.details.url?<Button target="_blank" href={this.state.details.url}>Visit Website</Button>:null}
+                               </Col>
+                            </Row>
+                            <Row className="d-flex justify-content-center">
+                                <Col lg={{size: 12}} className="d-flex justify-content-center">
+                                    {this.state.details.cuisine?<h3>Cuisine: {this.state.details.cuisine}</h3>:<h3>Cuisine: Not Available</h3>}
+                                </Col>
+                     
+                            </Row>
+                            
                         </Col>
-                        <Col lg={{size: 4}}>
-                            <StarRatingComponent className="RestaurantRating" name="ResaurantRating" emptyStarColor="gray" value={parseFloat(this.state.details.rating)} editable={false} />
+
+                        <Col lg={{size: 6}}>
+                            <Row className="toastAddressPhone">
+                            <Toast>
+                                <ToastHeader icon="primary">
+                                    Phone: {this.state.details.phone}
+                                </ToastHeader>
+                                <ToastBody>
+                                Address: <a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
+                                </ToastBody>
+                            </Toast>
+                            </Row>
+
                         </Col>
-                        <Col lg={{size: 8}}>
-                        {this.state.details.url?<Button target="_blank" href={this.state.details.url}>Visit Website</Button>:null}
-                        </Col>
+
                     </Row>
-                    <Row>
+                    {/* <Row>
                         <Col lg={{size: 12}}>
                         {this.state.details.cuisine?<h3>Cuisine: {this.state.details.cuisine}</h3>:<h3>Cuisine: Not Available</h3>}
                         </Col>
@@ -132,7 +158,7 @@ class DetailsPage extends React.Component{
                         <Col lg={{size: 12}}>
                         {this.state.details.type?<h3>Category: {this.state.details.type}</h3>:<h3>Category: Not Available</h3>}
                         </Col>
-                    </Row>
+                    </Row> */}
 
                     <div id="details_page_review_section">
                         <Container>
