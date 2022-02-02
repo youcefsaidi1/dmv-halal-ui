@@ -1,5 +1,4 @@
-
-@import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Indie+Flower&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Exo+2&family=Titan+One&display=swap');
 
 
 .header {
@@ -34,6 +33,11 @@
     border-radius: 25px;
 }
 
+.restaurantName {
+    font-family: 'Titan One', cursive;
+    
+}
+
 .RestaurantRating{
     font-size: 1.5rem;
 }
@@ -56,8 +60,7 @@ body{
     font-family: 'Exo 2', sans-serif;
     margin-top: 5%;
     margin-bottom: 5%;
-    align-content: center;
-    text-align: center;
+
 }
 
 .toast-header, .toast-body {

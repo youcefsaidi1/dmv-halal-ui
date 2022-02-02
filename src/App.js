@@ -77,6 +77,7 @@ renderAddRestaurant = ()=>{
                 <Switch>
                   <Route exact path="/details/:id" component={this.renderDetails}/>
                   <Route path='/addRestaurant' component={this.renderAddRestaurant}/>
+                  <Route path="/restaurants" component={this.renderLocations}/>
                   <Route path="/" component={this.renderLocations}/>
                 </Switch>
               </div>

@@ -3,6 +3,8 @@ import axios from 'axios'
 import { withRouter } from "react-router-dom";
 import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
+import { FaPhone, FaAddressBook } from "react-icons/fa";
+
 
 
 var BASEURL = "13v4yjfvyi.execute-api.us-east-1.amazonaws.com";
@@ -111,7 +113,7 @@ class DetailsPage extends React.Component{
                     <Row>
                         <Col lg={{size: 6}}>
                             <Row className="d-flex justify-content-center">
-                                <h1>{this.state.details.restaurant}</h1>
+                                <h1 className="restaurantName">{this.state.details.restaurant}</h1>
                             </Row>
                             <Row className="d-flex justify-content-center">
                                 <Col sm={{size: 6}} className="d-flex justify-content-center">
@@ -124,8 +126,15 @@ class DetailsPage extends React.Component{
                             <Row className="d-flex justify-content-center">
                                 <Col lg={{size: 12}} className="d-flex justify-content-center">
                                     {this.state.details.cuisine?<h5>Cuisine: {this.state.details.cuisine}</h5>:<h5>Cuisine: Not Available</h5>}
+                                    
                                 </Col>
+
                      
+                            </Row>
+                            <Row className="d-flex justify-content-center">
+                                <Col className="d-flex justify-content-center">
+                                    {this.state.details.type?<h5>Category: {this.state.details.type}</h5>:<h5>Category: Not Available</h5>}
+                                </Col>
                             </Row>
                             
                         </Col>
@@ -133,11 +142,12 @@ class DetailsPage extends React.Component{
                         <Col lg={{size: 6}}>
                             <div className="toastAddressPhone">
                             <Toast  >
-                                <ToastHeader icon="primary">
-                                    Phone: {this.state.details.phone}
+                                <ToastHeader icon="primary" className="d-flex justify-content-center">
+                                    Contacts
                                 </ToastHeader>
                                 <ToastBody>
-                                Address: <a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
+                                    {this.state.details.phone?<div><FaPhone />&#9;{this.state.details.phone}</div>:<h5><FaPhone />&#9;Not Available</h5>}
+                                    <FaAddressBook />&#9;<a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
                                 </ToastBody>
                             </Toast>
                             </div>
@@ -145,20 +155,6 @@ class DetailsPage extends React.Component{
                         </Col>
 
                     </Row>
-                    {/* <Row>
-                        <Col lg={{size: 12}}>
-                        {this.state.details.cuisine?<h3>Cuisine: {this.state.details.cuisine}</h3>:<h3>Cuisine: Not Available</h3>}
-                        </Col>
-                        <Col lg={{size: 12}}>
-                        <h3>Address: <a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a></h3>
-                        </Col>
-                        <Col lg={{size: 12}}>
-                        {this.state.details.phone?<h3>Phone: {this.state.details.phone}</h3>:<h3>Phone: Not Available</h3>}
-                        </Col>
-                        <Col lg={{size: 12}}>
-                        {this.state.details.type?<h3>Category: {this.state.details.type}</h3>:<h3>Category: Not Available</h3>}
-                        </Col>
-                    </Row> */}
 
                     <div id="details_page_review_section">
                         <Container>
