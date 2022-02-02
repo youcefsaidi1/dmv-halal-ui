@@ -123,7 +123,7 @@ class DetailsPage extends React.Component{
                             </Row>
                             <Row className="d-flex justify-content-center">
                                 <Col lg={{size: 12}} className="d-flex justify-content-center">
-                                    {this.state.details.cuisine?<h3>Cuisine: {this.state.details.cuisine}</h3>:<h3>Cuisine: Not Available</h3>}
+                                    {this.state.details.cuisine?<h5>Cuisine: {this.state.details.cuisine}</h5>:<h5>Cuisine: Not Available</h5>}
                                 </Col>
                      
                             </Row>
@@ -131,8 +131,8 @@ class DetailsPage extends React.Component{
                         </Col>
 
                         <Col lg={{size: 6}}>
-                            <Row className="toastAddressPhone">
-                            <Toast>
+                            <div className="toastAddressPhone">
+                            <Toast  >
                                 <ToastHeader icon="primary">
                                     Phone: {this.state.details.phone}
                                 </ToastHeader>
@@ -140,7 +140,7 @@ class DetailsPage extends React.Component{
                                 Address: <a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
                                 </ToastBody>
                             </Toast>
-                            </Row>
+                            </div>
 
                         </Col>
 

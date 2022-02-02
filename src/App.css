@@ -54,12 +54,10 @@ body{
 
 .toastAddressPhone {
     font-family: 'Exo 2', sans-serif;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
+    margin-top: 5%;
+    margin-bottom: 5%;
+    align-content: center;
+    text-align: center;
 }
 
 .toast-header, .toast-body {
@@ -70,9 +68,11 @@ body{
 
 .toast-header svg {
     height: 0px;
+    width: 0px;
 }
 
 
-@media only screen and (max-width: 767px) {
+/* @media only screen and (min-width: 990px) {
 
-  }
+  } */
+
