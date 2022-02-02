@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
-import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader, CardSubtitle} from 'reactstrap';
+import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import { FaPhone, FaAddressBook } from "react-icons/fa";
 
@@ -141,12 +141,10 @@ class DetailsPage extends React.Component{
 
                         <Col lg={{size: 6}}>
                             <div className="toastAddressPhone">
-                            <Toast  >
-                                <ToastHeader icon="primary" className="d-flex justify-content-center">
-                                    Contacts
-                                </ToastHeader>
+                            <Toast >
                                 <ToastBody>
                                     {this.state.details.phone?<div><FaPhone />&#9;{this.state.details.phone}</div>:<h5><FaPhone />&#9;Not Available</h5>}
+                                    <hr />
                                     <FaAddressBook />&#9;<a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
                                 </ToastBody>
                             </Toast>
