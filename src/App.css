@@ -24,6 +24,9 @@
     box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)!important;
     
 }
+
+
+
 #details_page_review_section{
     font-family: 'Exo 2', sans-serif;
     box-shadow: 16px 8px 16px 0px rgba(0,0,0,0.2)!important;
@@ -74,7 +77,14 @@ svg {
     margin-right: 1%;
 }
 
+.card-title {
+    font-size: 1.5rem;
+}
 
+.card hr {
+    margin-top: 0rem;
+    margin-bottom: .5rem;
+}
 
 /* @media only screen and (min-width: 990px) {
 
