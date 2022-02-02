@@ -93,7 +93,7 @@ export default class AddRestaurant extends React.Component{
                                 </Col>
                                 <Col sm={{size: 9}}>
                                     <select required name="State" className="form-control">
-                                        <option defaultValue>State</option>
+                                        <option defaultValue></option>
                                         <option value="MD">Maryland</option>
                                         <option value="VA">Virgina</option>
                                         <option value="DC">Washington D.C.</option>

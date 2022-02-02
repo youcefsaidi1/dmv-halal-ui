@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
-import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, ToastHeader, CardSubtitle} from 'reactstrap';
+import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import { FaPhone, FaAddressBook } from "react-icons/fa";
 
@@ -36,7 +36,8 @@ class DetailsPage extends React.Component{
     }
 
     handleChange = (e) =>{
-        this.setState({comment: e.target.value})
+        this.setState({comment: e.target.value, displayCommentMessage: false, displayRatingMessage: false})
+     
     }
 
     onStarClick(nextValue) {
@@ -141,12 +142,10 @@ class DetailsPage extends React.Component{
 
                         <Col lg={{size: 6}}>
                             <div className="toastAddressPhone">
-                            <Toast  >
-                                <ToastHeader icon="primary" className="d-flex justify-content-center">
-                                    Contacts
-                                </ToastHeader>
+                            <Toast >
                                 <ToastBody>
                                     {this.state.details.phone?<div><FaPhone />&#9;{this.state.details.phone}</div>:<h5><FaPhone />&#9;Not Available</h5>}
+                                    <hr />
                                     <FaAddressBook />&#9;<a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
                                 </ToastBody>
                             </Toast>
@@ -184,14 +183,13 @@ class DetailsPage extends React.Component{
 
                                         <Form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                                             <FormGroup>
-                                                <Input type="textarea" placeholder={`How was your experience at ${this.state.details.restaurant}`}>
+                                                <Input id="comment" type="textarea" placeholder={`Details on your experience at ${this.state.details.restaurant} (Optional)`}>
                                                 </Input>
                                                 {this.state.displayCommentMessage?<h6>Comment must be less than 500 characters!</h6>:null}
                                                 {this.state.displayRatingMessage?<h6>Rating must have at least 1 star!</h6>:null}
                                                 {this.state.successMessage?<h6>Thank you for your feedback!</h6>:null}
                                                 {(!this.state.successMessage &&  !this.state.showButton)?<h6>Submitting...</h6>:null}
                                                 {this.state.showButton?<Button className="my-2" name="reviewButton">Submit</Button>:null}
-
                                             </FormGroup>
                                         </Form>                                        
                                         </Container>
