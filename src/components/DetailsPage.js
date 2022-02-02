@@ -36,7 +36,8 @@ class DetailsPage extends React.Component{
     }
 
     handleChange = (e) =>{
-        this.setState({comment: e.target.value})
+        this.setState({comment: e.target.value, displayCommentMessage: false, displayRatingMessage: false})
+     
     }
 
     onStarClick(nextValue) {
@@ -182,14 +183,13 @@ class DetailsPage extends React.Component{
 
                                         <Form onSubmit={this.handleSubmit} onChange={this.handleChange}>
                                             <FormGroup>
-                                                <Input type="textarea" placeholder={`How was your experience at ${this.state.details.restaurant}`}>
+                                                <Input id="comment" type="textarea" placeholder={`Details on your experience at ${this.state.details.restaurant} (Optional)`}>
                                                 </Input>
                                                 {this.state.displayCommentMessage?<h6>Comment must be less than 500 characters!</h6>:null}
                                                 {this.state.displayRatingMessage?<h6>Rating must have at least 1 star!</h6>:null}
                                                 {this.state.successMessage?<h6>Thank you for your feedback!</h6>:null}
                                                 {(!this.state.successMessage &&  !this.state.showButton)?<h6>Submitting...</h6>:null}
                                                 {this.state.showButton?<Button className="my-2" name="reviewButton">Submit</Button>:null}
-
                                             </FormGroup>
                                         </Form>                                        
                                         </Container>
