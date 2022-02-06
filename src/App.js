@@ -12,8 +12,9 @@ import {
   Route
 } from "react-router-dom";
 
-
+const restaurantData = require('./restdata.json');
 var BASEURL = '13v4yjfvyi.execute-api.us-east-1.amazonaws.com';
+
 class App extends React.Component {
   constructor(props){
     super(props)
@@ -21,19 +22,22 @@ class App extends React.Component {
     this.renderDetails = this.renderDetails.bind(this);
   }
 async componentDidMount(){
-  
-  axios.get(`https://${BASEURL}/restaurant`).then(data=>{
-    let approvedRestaurants = data.data.filter(restaurant=>{
-      this.setState({homePageLoaded: true})
-      return restaurant
-    })
-
-    this.setState({list: approvedRestaurants})
+  if (window.location.hostname === 'localhosta'){
+      this.setState({homePageLoaded: true, list: restaurantData})
+  }else{
+      axios.get(`https://${BASEURL}/restaurant`).then(data=>{
+        let approvedRestaurants = data.data.filter(restaurant=>{
+          this.setState({homePageLoaded: true})
+          return restaurant
+        })
+    
+        this.setState({list: approvedRestaurants})
+      }
+      ).catch(err=>{
+        this.setState({homePageLoaded: true, error: true})
+        console.log(err)
+      })
   }
-  ).catch(err=>{
-    this.setState({homePageLoaded: true, error: true})
-    console.log(err)
-  })
 }
 
 filterName = (query)=>{
