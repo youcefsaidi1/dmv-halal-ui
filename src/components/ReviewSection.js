@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
-import {NavLink, TabContent, TabPane, Nav, NavItem, Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
+import {NavLink, TabContent, TabPane, Nav, NavItem, Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 // import { FaPhone, FaAddressBook } from "react-icons/fa";
 import classnames from 'classnames';

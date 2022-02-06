@@ -22,7 +22,7 @@ class App extends React.Component {
     this.renderDetails = this.renderDetails.bind(this);
   }
 async componentDidMount(){
-  if (window.location.hostname == 'localhosta'){
+  if (window.location.hostname === 'localhosta'){
       this.setState({homePageLoaded: true, list: restaurantData})
   }else{
       axios.get(`https://${BASEURL}/restaurant`).then(data=>{
