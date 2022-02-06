@@ -24,7 +24,7 @@ class DetailsPage extends React.Component{
         }
         else{
 
-            if (window.location.hostname === 'localhost'){
+            if (window.location.hostname === 'localhosta'){
                 this.setState({details: restaurantData[0], detailsLoaded: true})
             }else{  
                 axios.get(`https://${BASEURL}/restaurant/${this.props.match.params.id}`).then(data=>{

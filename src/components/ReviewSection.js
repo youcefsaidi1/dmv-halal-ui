@@ -24,14 +24,12 @@ class ReviewSection extends React.Component {
             axios.get(`https://${BASEURL}/review/google/${this.state.details.place_id}`).then(data=>{
 
                     let reviewList = []
-                    if (data.data.status === 'OK'){
-                        data.data.result.reviews.forEach((review)=>{
-                            let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
-                            reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
-                        })
-                    }
-
                     
+                    data.data.result.reviews.forEach((review)=>{
+                        let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
+                        reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
+                    })
+                   
                     // let details = {...this.state.details}
                     // details.reviews = [...reviewList]
 
