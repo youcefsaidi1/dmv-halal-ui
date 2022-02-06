@@ -4,7 +4,6 @@ import { withRouter } from "react-router-dom";
 import {NavLink, TabContent, TabPane, Nav, NavItem, Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 // import { FaPhone, FaAddressBook } from "react-icons/fa";
-// import { Loader } from '@googlemaps/js-api-loader';
 import classnames from 'classnames';
 
 
@@ -16,52 +15,6 @@ class ReviewSection extends React.Component {
         this.state = {...this.props.data, activeTab: '1', googlerequested: false, googlereviews: [], localreviews: this.props.data.details.reviews, showreviews: true}
         this.toggle = this.toggle.bind(this);
     }
-
-    // initializeGoogleReviews = (e) => {
-    //     if (this.props.data.details.place_id && !this.state.googlerequested){
-    //         console.log("request sent to google")
-    //         const loader = new Loader({
-    //             apiKey: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
-    //             version: "weekly",
-    //             libraries: ["places"]
-    //         });
-            
-    //         const mapOptions = {
-    //             center: {
-    //             lat: 0,
-    //             lng: 0
-    //             },
-    //             zoom: 4
-    //         };
-
-    //         loader
-    //         .load()
-    //         .then((google) => {
-    //             const map = new google.maps.Map(document.getElementById("map"), mapOptions);
-    //             const request = {
-    //                 placeId: this.state.details.place_id,
-    //                 fields: ["reviews"],
-    //             };
-    //             const service = new google.maps.places.PlacesService(map);
-    //             service.getDetails(request, (place, status) => {
-    //                 let reviewList = []
-    //                 place.reviews.forEach((review)=>{
-    //                     let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
-    //                     reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
-    //                 })
-    //                 // let details = {...this.state.details}
-    //                 // details.reviews = [...reviewList]
-    //                 this.setState({googlereviews: reviewList})
-    //             })
-
-    //         })
-    //         .catch(e => {
-    //             console.log(e)
-    //         });            
-    //     }
-    
-    // }
-  
 
     toggle(tab) {
 
