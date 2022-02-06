@@ -86,6 +86,12 @@ svg {
     margin-bottom: .5rem;
 }
 
+#googleFooter {
+    font-size: x-small;
+    text-align: center;
+    font-style: italic;
+}
+
 /* @media only screen and (min-width: 990px) {
 
   } */

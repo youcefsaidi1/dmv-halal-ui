@@ -4,7 +4,7 @@ import { withRouter } from "react-router-dom";
 import {NavLink, TabContent, TabPane, Nav, NavItem, Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 // import { FaPhone, FaAddressBook } from "react-icons/fa";
-import { Loader } from '@googlemaps/js-api-loader';
+// import { Loader } from '@googlemaps/js-api-loader';
 import classnames from 'classnames';
 
 
@@ -13,59 +13,85 @@ var BASEURL = "13v4yjfvyi.execute-api.us-east-1.amazonaws.com";
 class ReviewSection extends React.Component {
     constructor(props){
         super(props)
-        this.state = {...this.props.data, activeTab: '1', googlerequested: false, googlereviews: [], localreviews: this.props.data.details.reviews}
+        this.state = {...this.props.data, activeTab: '1', googlerequested: false, googlereviews: [], localreviews: this.props.data.details.reviews, showreviews: true}
         this.toggle = this.toggle.bind(this);
     }
 
-    initializeGoogleReviews = (e) => {
-        if (this.props.data.details.place_id && !this.state.googlerequested){
-            console.log("request sent to google")
-            const loader = new Loader({
-                apiKey: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
-                version: "weekly",
-                libraries: ["places"]
-            });
+    // initializeGoogleReviews = (e) => {
+    //     if (this.props.data.details.place_id && !this.state.googlerequested){
+    //         console.log("request sent to google")
+    //         const loader = new Loader({
+    //             apiKey: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg",
+    //             version: "weekly",
+    //             libraries: ["places"]
+    //         });
             
-            const mapOptions = {
-                center: {
-                lat: 0,
-                lng: 0
-                },
-                zoom: 4
-            };
+    //         const mapOptions = {
+    //             center: {
+    //             lat: 0,
+    //             lng: 0
+    //             },
+    //             zoom: 4
+    //         };
 
-            loader
-            .load()
-            .then((google) => {
-                const map = new google.maps.Map(document.getElementById("map"), mapOptions);
-                const request = {
-                    placeId: this.state.details.place_id,
-                    fields: ["reviews"],
-                };
-                const service = new google.maps.places.PlacesService(map);
-                service.getDetails(request, (place, status) => {
-                    let reviewList = []
-                    place.reviews.forEach((review)=>{
-                        let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
-                        reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
-                    })
-                    // let details = {...this.state.details}
-                    // details.reviews = [...reviewList]
-                    this.setState({googlereviews: reviewList})
-                })
+    //         loader
+    //         .load()
+    //         .then((google) => {
+    //             const map = new google.maps.Map(document.getElementById("map"), mapOptions);
+    //             const request = {
+    //                 placeId: this.state.details.place_id,
+    //                 fields: ["reviews"],
+    //             };
+    //             const service = new google.maps.places.PlacesService(map);
+    //             service.getDetails(request, (place, status) => {
+    //                 let reviewList = []
+    //                 place.reviews.forEach((review)=>{
+    //                     let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
+    //                     reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
+    //                 })
+    //                 // let details = {...this.state.details}
+    //                 // details.reviews = [...reviewList]
+    //                 this.setState({googlereviews: reviewList})
+    //             })
 
-            })
-            .catch(e => {
-                console.log(e)
-            });            
-        }
+    //         })
+    //         .catch(e => {
+    //             console.log(e)
+    //         });            
+    //     }
     
-    }
+    // }
   
 
     toggle(tab) {
+
         if (tab === '2' && !this.state.googleRequested){
-            this.initializeGoogleReviews()
+            this.setState({showreviews: false})
+            
+            axios.get(`https://${BASEURL}/review/google/${this.state.details.place_id}`).then(data=>{
+
+                    let reviewList = []
+                    if (data.data.status === 'OK'){
+                        data.data.result.reviews.forEach((review)=>{
+                            let time = new Date(1549312452 * 1000).toISOString().slice(0, 19).replace('T', ' ')
+                            reviewList.push( {rating: review.rating, createdAt: time, comment: review.text, approved: true, restaurantid: this.state.details.restaurantid})
+                        })
+                    }
+
+                    
+                    // let details = {...this.state.details}
+                    // details.reviews = [...reviewList]
+
+                    // this.setState({details: data.data.Item, detailsLoaded: true})
+                    this.setState({googlereviews: reviewList, showreviews: true})  
+              
+                return data.data.Item
+            }).catch(err=>{
+                console.log(err)
+                this.props.history.push('/restaurants')
+            })
+
+
             this.setState({googleRequested: true})
         }
         if (this.state.activeTab !== tab) {
@@ -207,7 +233,11 @@ class ReviewSection extends React.Component {
                         {review}
                     </TabPane>
                     <TabPane tabId="2">
-                        {review}
+                        {this.state.showreviews
+                            ?
+                            (review.length>0?review:<h5>We Could Not Find Any Reviews :(</h5>)
+                            :
+                            <p>loading..</p>}  
                     </TabPane>
                 </TabContent>
             </Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios'
 import { withRouter } from "react-router-dom";
-import {Container, Row, Col, Card, CardTitle, CardFooter, Form, FormGroup, Button, Input, Toast, ToastBody, CardSubtitle} from 'reactstrap';
+import {Container, Row, Col, Footer, Button, Toast, ToastBody} from 'reactstrap';
 import StarRatingComponent from 'react-star-rating-component';
 import { FaPhone, FaAddressBook } from "react-icons/fa";
 import ReviewSection from './ReviewSection';
@@ -94,6 +94,9 @@ class DetailsPage extends React.Component{
                     <div id="details_page_review_section">
                         <ReviewSection data={this.state}/>
                     </div>
+                    <footer>
+                        <p id='googleFooter'>This page uses Google's Maps API: <a href="https://www.google.com/policies/privacy">Privacy Policy</a>, <a href="https://www.google.com/intl/en/policies/terms">Terms and Services</a></p>
+                    </footer>
                 </Container>
             )
         }
