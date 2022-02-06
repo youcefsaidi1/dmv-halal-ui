@@ -80,7 +80,7 @@ class DetailsPage extends React.Component{
                             <div className="toastAddressPhone">
                             <Toast >
                                 <ToastBody>
-                                    {this.state.details.phone?<div><FaPhone />&#9;{this.state.details.phone}</div>:<h5><FaPhone />&#9;Not Available</h5>}
+                                    {this.state.details.phone?<div><FaPhone />&#9;<a href={`tel:${this.state.details.phone}`}>{this.state.details.phone}</a></div>:<h5><FaPhone />&#9;Not Available</h5>}
                                     <hr />
                                     <FaAddressBook />&#9;<a href={`https://maps.google.com/?q=${this.state.details.address}`}>{this.state.details.address}</a>
                                 </ToastBody>
