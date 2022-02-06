@@ -57,7 +57,7 @@ class DetailsPage extends React.Component{
             else{
                 e.preventDefault()
                 this.setState({showButton: false})
-                axios.post(`https://${BASEURL}/addCommentToRestaurant`,{data: this.state.details, comment: this.state.comment, rating: this.state.reviewRating, createdAt: new Date().toLocaleString()}).then(data=>{ 
+                axios.post(`https://${BASEURL}/review/add`,{data: this.state.details, comment: this.state.comment, rating: this.state.reviewRating, createdAt: new Date().toLocaleString()}).then(data=>{ 
                         this.setState({successMessage: true, displayCommentMessage: false, displayRatingMessage: false})  
                 }).catch(err=>{
                     this.props.history.push('/restaurants')
