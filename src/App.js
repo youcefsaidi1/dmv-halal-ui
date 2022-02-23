@@ -22,16 +22,18 @@ class App extends React.Component {
     this.renderDetails = this.renderDetails.bind(this);
   }
 async componentDidMount(){
-  if (window.location.hostname === 'localhosta'){
-      this.setState({homePageLoaded: true, list: restaurantData})
+  if (window.location.hostname === 'localhost'){
+      let approvedRestaurants = restaurantData.filter(restaurant => {
+        console.log(restaurant.approved)
+        return restaurant.approved !== false;
+      })
+      this.setState({homePageLoaded: true, list: approvedRestaurants})
   }else{
       axios.get(`https://${BASEURL}/restaurant`).then(data=>{
         let approvedRestaurants = data.data.filter(restaurant=>{
-          this.setState({homePageLoaded: true})
-          return restaurant
+          return restaurant.approved !== false;
         })
-    
-        this.setState({list: approvedRestaurants})
+        this.setState({list: approvedRestaurants, homePageLoaded: true})
       }
       ).catch(err=>{
         this.setState({homePageLoaded: true, error: true})

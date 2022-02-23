@@ -18,7 +18,8 @@
         "halalStatus": "",
         "phone": "(703) 448-8500",
         "type": "Semi-Formal",
-        "place_id": "ChIJW45gk3S1t4kRFth5kDcZTQo"
+        "place_id": "ChIJW45gk3S1t4kRFth5kDcZTQo",
+        "approved": false
     },
     {
         "restaurant": "New Yorker Pizza",
