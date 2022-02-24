@@ -5,26 +5,43 @@ import {Container, Row, Col, ButtonDropdown, DropdownItem, DropdownToggle, Dropd
  export default class Locations extends React.Component {
      constructor(props){
          super(props)
-         this.state = {dropdownOpen: false, dropDownValue: "All Cuisines"}
+         this.state = {dropdownOpen: false, dropdownLocationOpen: false, dropDownValue: "All Cuisines", dropDownLocationValue: "All Locations"}
      }
 
      handleSearchChange = e =>{
          this.setState({
-             dropDownValue: "All Cuisines"
+             dropDownValue: "All Cuisines", dropDownLocationValue: "All Locations"
          })
          this.props.filterName(e.target.value)
      }
 
      toggle = e => {
-        this.setState(prevState => ({
-          dropdownOpen: !prevState.dropdownOpen
-        }));
+        if (e.target.name === "Cuisines"){
+            this.setState(prevState => ({
+            dropdownOpen: !prevState.dropdownOpen,  dropdownLocationOpen: false
+            }));
+        }else if (e.target.name === "Locations"){
+            this.setState(prevState => ({
+                dropdownLocationOpen: !prevState.dropdownLocationOpen, dropdownOpen: false
+                }));
+        }else{
+            this.setState({
+                dropdownLocationOpen: false, dropdownOpen: false
+                });
+        }
       }
 
       toggleFilterName = e => {
         if (e.target.id){
             this.setState({dropDownValue: e.target.id})
-            this.props.filterCuisine(e.target.id)
+            this.props.filterDropDowns([e.target.id, this.state.dropDownLocationValue])
+        }
+      }
+
+      toggleFilterLocation = e => {
+        if (e.target.id){
+            this.setState({dropDownLocationValue: e.target.id})
+            this.props.filterDropDowns([this.state.dropDownValue, e.target.id])
         }
       }
 
@@ -60,28 +77,46 @@ import {Container, Row, Col, ButtonDropdown, DropdownItem, DropdownToggle, Dropd
                         </div> 
                     </Col>
                 </Row>
-                <Row className="mt-1 mr-1 d-flex justify-content-end">
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret name="All Cuisines" >{this.state.dropDownValue}</DropdownToggle>
-                    <DropdownMenu>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="All Cuisines">All Cuisines</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Afghan">Afghan</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="American">American</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Bakery">Bakery</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Chinese">Chinese</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Fast Food">Fast Food</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="indian">Indian</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Mediterranean">Mediterranean</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Middle Eastern">Middle Eastern</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Nepalese">Nepalese</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Pakistani">Pakistani</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Persian">Persian</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Peruvian">Peruvian</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Portuguese">Portuguese</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Thai">Thai</div></DropdownItem>
-                        <DropdownItem ><div onClick={this.toggleFilterName} id="Turkish">Turkish</div></DropdownItem>                  
-                    </DropdownMenu>
+                <Row className="mt-1 mr-1">
+
+                <Col>
+                    <Row className="mt-1 ml-1 d-flex justify-content-start">               
+                    <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                        <DropdownToggle caret name="Cuisines" >{this.state.dropDownValue}</DropdownToggle>
+                        <DropdownMenu>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="All Cuisines">All Cuisines</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Afghan">Afghan</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="American">American</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Bakery">Bakery</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Chinese">Chinese</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Fast Food">Fast Food</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="indian">Indian</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Mediterranean">Mediterranean</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Middle Eastern">Middle Eastern</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Nepalese">Nepalese</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Pakistani">Pakistani</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Persian">Persian</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Peruvian">Peruvian</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Portuguese">Portuguese</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Thai">Thai</div></DropdownItem>
+                            <DropdownItem ><div onClick={this.toggleFilterName} id="Turkish">Turkish</div></DropdownItem>                  
+                        </DropdownMenu>
                     </ButtonDropdown>
+                    </Row>
+                </Col>
+                <Col>
+                    <Row className="mt-1 d-flex justify-content-end">
+                        <ButtonDropdown isOpen={this.state.dropdownLocationOpen} toggle={this.toggle}>
+                            <DropdownToggle caret name="Locations" >{this.state.dropDownLocationValue}</DropdownToggle>
+                            <DropdownMenu>
+                                <DropdownItem ><div onClick={this.toggleFilterLocation} id="All">All</div></DropdownItem>
+                                <DropdownItem ><div onClick={this.toggleFilterLocation} id="Northern Virginia">VA</div></DropdownItem>
+                                <DropdownItem ><div onClick={this.toggleFilterLocation} id="Maryland">MD</div></DropdownItem>   
+                                <DropdownItem ><div onClick={this.toggleFilterLocation} id="DC">DC</div></DropdownItem>             
+                            </DropdownMenu>
+                        </ButtonDropdown>
+                    </Row>
+                </Col>
                 </Row>
                 <Row className="mt-2 mb-5 d-flex justify-content-center">
                     {this.props.state.homePageLoaded?

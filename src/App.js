@@ -22,9 +22,8 @@ class App extends React.Component {
     this.renderDetails = this.renderDetails.bind(this);
   }
 async componentDidMount(){
-  if (window.location.hostname === 'localhost'){
+  if (window.location.hostname === 'localhosta'){
       let approvedRestaurants = restaurantData.filter(restaurant => {
-        console.log(restaurant.approved)
         return restaurant.approved !== false;
       })
       this.setState({homePageLoaded: true, list: approvedRestaurants})
@@ -50,15 +49,33 @@ filterName = (query)=>{
   this.setState({filteredRestaurants: filteredRestaurants})
 }
 
-filterCuisine = (query)=>{
+filterDropDowns = (query) => {
+  let [cuisine, location] = query
   let filteredRestaurants = this.state.list;
-  if (query === "All Cuisines"){
+  if (cuisine === 'All Cuisines' && location === 'All'){
     this.setState({filteredRestaurants: this.state.list})
-  }else{
-      filteredRestaurants = filteredRestaurants.filter(restaurant =>{
-        return restaurant.cuisine.toLowerCase().includes(query.toLowerCase())
-      })
+  }else if (cuisine === 'All Cuisines'){
+    filteredRestaurants = filteredRestaurants.filter(restaurant => {
+      return restaurant.region.toLowerCase().includes(location.toLowerCase())})
       this.setState({filteredRestaurants: filteredRestaurants})
+
+  }else if (location === 'All Locations'){
+    filteredRestaurants = filteredRestaurants.filter(restaurant =>{
+      return restaurant.cuisine.toLowerCase().includes(cuisine.toLowerCase())
+    })
+    this.setState({filteredRestaurants: filteredRestaurants})
+
+  }else{
+    filteredRestaurants = filteredRestaurants.filter(restaurant =>{
+      return restaurant.cuisine.toLowerCase().includes(cuisine.toLowerCase())
+    })
+
+
+    filteredRestaurants = filteredRestaurants.filter(restaurant =>{
+      return restaurant.region.toLowerCase().includes(location.toLowerCase())
+    })
+    
+    this.setState({filteredRestaurants: filteredRestaurants})
   }
 }
 
@@ -67,7 +84,7 @@ handleClick = (data) =>{
 }
 
 renderLocations = ()=>{
-  return <Locations state={this.state} handleClick={this.handleClick} filterName={this.filterName} filterCuisine={this.filterCuisine}/>
+  return <Locations state={this.state} handleClick={this.handleClick} filterName={this.filterName} filterDropDowns={this.filterDropDowns}/>
 }
 
 renderDetails = (match)=>{
